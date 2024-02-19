@@ -26,14 +26,15 @@ Epoller::~Epoller()
     delete [] revents;
 }
 
-void Epoller::addFd(int fd,uint32_t op)
-{
-    struct epoll_event ev;
-    bzero(&ev,sizeof(ev));
-    ev.data.fd=fd;
-    ev.events=op;
-    errif(epoll_ctl(epfd,EPOLL_CTL_ADD,fd,&ev)==-1,"epoll add event error");
-}
+//之前是在Epoller对象里实现fd的添加，现在转到Channel中，Epoll对象只负责管理Channel对象
+// void Epoller::addFd(int fd,uint32_t op)
+// {
+//     struct epoll_event ev;
+//     bzero(&ev,sizeof(ev));
+//     ev.data.fd=fd;
+//     ev.events=op;
+//     errif(epoll_ctl(epfd,EPOLL_CTL_ADD,fd,&ev)==-1,"epoll add event error");
+// }
 
 //调用epoll_wait，将发生的事件所对应的fd绑定到channel对象，并将channel对象放进vector数组中准备处理
 std::vector<Channel*> Epoller::poll(int timeout)

@@ -14,6 +14,9 @@ public:
     ~InetAddress();
     sockaddr_in getAddr();
     socklen_t getAddr_len();
+    void setInetAddr(sockaddr_in _addr);
+    char* getIp();
+    uint16_t getPort();
 };
 
 

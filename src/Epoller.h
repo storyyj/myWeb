@@ -12,8 +12,9 @@ private:
 public:
     Epoller();
     ~Epoller();
-    void addFd(int fd,uint32_t op);
+    // void addFd(int fd,uint32_t op);
     void updateChannel(Channel*);
+    void deleteChannel(Channel*);
     //poll函数用来返回一个装着指向Channel类的指针vector数组，用来管理channel类
     std::vector<Channel*> poll(int timeout=-1);
 };
